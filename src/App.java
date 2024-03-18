@@ -10,6 +10,7 @@ public class App {
         put("green", "\u001B[32m");
         put("yellow", "\u001B[33m");
         put("blue", "\u001B[34m");
+        put("orange", "\u001B[38;5;208m");
         put("purple", "\u001B[35m");
         put("cyan", "\u001B[36m");
         put("white", "\u001B[37m");
@@ -31,22 +32,18 @@ public class App {
         Network network = Network.getNetworkData();        
 
         System.out.println(
-            "Public IP: " + network.public_ip
+            "Status: " + (network.isOnline ? colors.get("green") + "Online" + colors.get("reset") : colors.get("red") + "Offline" + colors.get("reset")) 
+            + "\nPublic IP: " + network.public_ip
+            + "\nISP: " + network.isp
+            + "\nLocation: " + network.location
             + "\nLocal IP: " + network.local_ip
             + "\nMAC Address: " + network.mac_address
             + "\nSubnet Mask: " + network.subnet_mask
         );
 
-        System.out.println("\n>> " + colors.get("green") + "RAM Information" + colors.get("reset") + "\n");
+        System.out.println("\n>> " + colors.get("orange") + "Storage Information" + colors.get("reset") + "\n");
 
-        RAM ram = new RAM();
-
-        System.out.println(
-            "Capacity: " + ram.capacity + " GB"
-            + "\nAvailable: " + ram.available + " GB"
-            + "\nUsed: " + ram.used + " GB");
-
-        System.out.println("\n>> " + colors.get("purple") + "Storage Information" + colors.get("reset") + "\n");
+        System.out.println(colors.get("purple") + "RAM: " + colors.get("reset") + Storage.RAM_capacity + " GB " + "(Available: " + Storage.RAM_available + " GB | " + "Used: " + Storage.RAM_used + " GB)" +  "\n");
 
         int hardDiskCount = 1;
 

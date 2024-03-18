@@ -1,3 +1,4 @@
+import java.net.ConnectException;
 import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
@@ -6,12 +7,17 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.Enumeration;
+import org.json.simple.*;
 
 public class Network {
+    public boolean isOnline = true;
+    public boolean isVPN = false;
     public String public_ip = "Unknown";
     public String local_ip = "Unknown";
     public String mac_address = "Unknown";
     public String subnet_mask = "Unknown";
+    public String isp = "N/A";
+    public String location = "N/A";
 
     public Network() {
         SetupNetworkData();
@@ -24,20 +30,6 @@ public class Network {
     }
 
     private void SetupNetworkData() {
-        // Get the public IP address via Amazon AWS
-        String urlString = "http://checkip.amazonaws.com/";
-        HttpClient client = HttpClient.newHttpClient();
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(urlString))
-                .build();
-
-        try {
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            public_ip = response.body().trim();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
         try {
             // Get all network interfaces
             Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces();
@@ -61,7 +53,48 @@ public class Network {
 
                     // Check if it's an IPv4 address (because it might get IPv6 address as well)
                     if (address instanceof Inet4Address) {
+                        // Get the local IP address
                         local_ip = address.getHostAddress();
+
+                        // Get the public IP address via Amazon AWS
+                        HttpClient client = HttpClient.newHttpClient();
+                        HttpRequest request = HttpRequest.newBuilder()
+                                .uri(URI.create("http://checkip.amazonaws.com/"))
+                                .build();
+
+                        try {
+                            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+                            public_ip = response.body().trim();
+                        }
+                        catch (ConnectException e) {
+                            isOnline = false;
+                            public_ip = "N/A";
+                        } 
+                        catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+                        if (isOnline) {
+                            String urlString = "https://ipapi.co/" + public_ip + "/json/";
+                            HttpClient client2 = HttpClient.newHttpClient();
+                            HttpRequest request2 = HttpRequest.newBuilder()
+                                .uri(URI.create(urlString))
+                                .build();
+
+                            try {
+                                HttpResponse<String> response = client2.send(request2, HttpResponse.BodyHandlers.ofString());
+                                JSONObject responseJSON = (JSONObject) JSONValue.parse(response.body());
+
+                                isp = (String) responseJSON.get("org");
+                                location = (String) responseJSON.get("region") + ", " + (String) responseJSON.get("country_name");
+                            }
+                            catch (ConnectException e) {
+                                isOnline = false;
+                            } 
+                            catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
 
                         // Get the hardware (MAC) address
                         byte[] hardwareAddress = ni.getHardwareAddress();
