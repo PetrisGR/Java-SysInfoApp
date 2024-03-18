@@ -74,6 +74,7 @@ public class Network {
                             e.printStackTrace();
                         }
 
+                        // Get IP's Geolocation information via ipapi.co
                         if (isOnline) {
                             String urlString = "https://ipapi.co/" + public_ip + "/json/";
                             HttpClient client2 = HttpClient.newHttpClient();
@@ -88,9 +89,6 @@ public class Network {
                                 isp = (String) responseJSON.get("org");
                                 location = (String) responseJSON.get("region") + ", " + (String) responseJSON.get("country_name");
                             }
-                            catch (ConnectException e) {
-                                isOnline = false;
-                            } 
                             catch (Exception e) {
                                 e.printStackTrace();
                             }
