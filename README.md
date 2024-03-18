@@ -2,20 +2,19 @@
 
 ---
 
-![presentation-image](https://github.com/PetrisGR/Java-SysInfoApp/assets/121623120/1dc2315f-abf4-4725-baec-9767dbbf4df9)
+![presentation-image](https://github.com/PetrisGR/Java-SysInfoApp/assets/121623120/34b8db57-7d77-494c-a0f2-bd1d903d044d)
 
 ---
 
 ## Description
 
-"Java-SysInfoApp" is a beginner-friendly project for collecting basic system information. Designed as one of my initial college assignments, this Java application explores operating system, network, RAM, and storage basic details.
+"Java-SysInfoApp" is a beginner-friendly project for collecting basic system information. Designed as one of my initial college assignments, this Java application explores operating system, network, and storage basic details.
 
 ## Features
 
 - **Operating System Information:** Displays details about the operating system, including manufacturer, name, version, and architecture.
-- **Network Information:** Shows public and local IP addresses, MAC address, and subnet mask.
-- **RAM Information:** Provides insights into RAM capacity, available, and used space.
-- **Storage Information:** Lists details about all connected disks, including total, free, and used space.
+- **Network Information:** Shows current online status, ISP provider, location (including region and country), public and local IP addresses, MAC address, and subnet mask.
+- **Storage Information:** Lists details about all connected disks (including disk letter, description and total, free, and used space) and provides insights into RAM capacity, available, and used space.
 
 ## Contributing
 
