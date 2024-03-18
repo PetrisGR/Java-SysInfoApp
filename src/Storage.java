@@ -23,7 +23,7 @@ public class Storage {
         
         System.out.println(
                 "Disk Name: " + diskName + "\n" + 
-                "Disk Description " + diskDescription + "\n" + 
+                "Disk Description: " + diskDescription + "\n" + 
                 "Total Space: " + new DecimalFormat("#.##").format(totalSpace/1024.0/1024.0/1024.0) + " GB\n" + // Format to GB and round to 2 decimal places
                 "Used Space: " + new DecimalFormat("#.##").format(usedSpace/1024.0/1024.0/1024.0) + " GB\n" +
                 "Free Space: " + new DecimalFormat("#.##").format(freeSpace/1024.0/1024.0/1024.0) + " GB\n"
