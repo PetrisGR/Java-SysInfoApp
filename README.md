@@ -2,7 +2,7 @@
 
 ---
 
-![presentation-image](https://github.com/PetrisGR/Java-SysInfoApp/assets/121623120/34b8db57-7d77-494c-a0f2-bd1d903d044d)
+![presentation-image](https://github.com/PetrisGR/Java-SysInfoApp/assets/121623120/08fcb5a3-954a-41ed-bdd0-701364602420)
 
 ---
 
@@ -15,6 +15,7 @@
 - **Operating System Information:** Displays details about the operating system, including manufacturer, name, version, and architecture.
 - **Network Information:** Shows current online status, ISP provider, location (including region and country), public and local IP addresses, MAC address, and subnet mask.
 - **Storage Information:** Lists details about all connected disks (including disk letter, description and total, free, and used space) and provides insights into RAM capacity, available, and used space.
+- **File Metadata Check:** Includes a file metadata checker which includes metadata like name, type, size, attributes, and timestamps.
 
 ## Contributing
 
