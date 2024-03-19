@@ -9,9 +9,8 @@ import java.net.http.HttpResponse;
 import java.util.Enumeration;
 import org.json.simple.*;
 
-public class Network {
+public class Network extends Info {
     public boolean isOnline = true;
-    public boolean isVPN = false;
     public String public_ip = "Unknown";
     public String local_ip = "Unknown";
     public String mac_address = "Unknown";
@@ -140,5 +139,21 @@ public class Network {
             }
         }
         return "Unknown";
+    }
+
+    public void print() {
+        System.out.println("\n>> " + App.colors.get("yellow") + "Network Information" + App.colors.get("reset") + "\n");
+
+        Network network = getNetworkData();        
+
+        System.out.println(
+            "Status: " + (network.isOnline ? App.colors.get("green") + "Online" + App.colors.get("reset") : App.colors.get("red") + "Offline" + App.colors.get("reset")) 
+            + "\nPublic IP: " + network.public_ip
+            + "\nISP: " + network.isp
+            + "\nLocation: " + network.location
+            + "\nLocal IP: " + network.local_ip
+            + "\nMAC Address: " + network.mac_address
+            + "\nSubnet Mask: " + network.subnet_mask
+        );
     }
 }

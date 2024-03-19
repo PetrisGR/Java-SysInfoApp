@@ -1,4 +1,4 @@
-public class OS {
+public class OS extends Info {
     public static final String name = System.getProperty("os.name");
     public static final String version = System.getProperty("os.version");
     public static final String architecture = System.getProperty("os.arch");
@@ -29,4 +29,15 @@ public class OS {
             return "Unknown";
         }
     } 
+
+    public void print() {
+        System.out.println(">> " + App.colors.get("blue") + "Operating System Information" + App.colors.get("reset") + "\n");
+
+        System.out.println(
+            "Manufacturer: " + OS.getManufacturer()
+            + "\nName: " + OS.name
+            + "\nVersion: " + OS.version
+            + "\nArchitecture: " + OS.architecture
+        );
+    }
 }

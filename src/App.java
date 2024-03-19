@@ -1,6 +1,6 @@
-import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 public class App {
     public static final Map<String, String> colors = new HashMap<String, String>() {{
@@ -18,39 +18,34 @@ public class App {
     }};
 
     public static void main(String[] args) throws Exception {
-        System.out.println(">> " + colors.get("blue") + "Operating System Information" + colors.get("reset") + "\n");
+        new OS().print(); // Print the operating system information
+        new Network().print(); // Print the network information
+        new Storage().print(); // Print the storage information
 
-        System.out.println(
-            "Manufacturer: " + OS.getManufacturer()
-            + "\nName: " + OS.name
-            + "\nVersion: " + OS.version
-            + "\nArchitecture: " + OS.architecture
-        );
+        Scanner scannerObj = new Scanner(System.in);
+        boolean run = true;
 
-        System.out.println("\n>> " + colors.get("yellow") + "Network Information" + colors.get("reset") + "\n");
+        do {
+            System.out.println("\n" + colors.get("yellow") + "(?) " + colors.get("reset") + "Do you want to check a file's metadata? ("+ colors.get("green") +"y" + colors.get("reset") + "/" + colors.get("red") + "n" + colors.get("reset") + ")");
 
-        Network network = Network.getNetworkData();        
+            String response = scannerObj.nextLine();
 
-        System.out.println(
-            "Status: " + (network.isOnline ? colors.get("green") + "Online" + colors.get("reset") : colors.get("red") + "Offline" + colors.get("reset")) 
-            + "\nPublic IP: " + network.public_ip
-            + "\nISP: " + network.isp
-            + "\nLocation: " + network.location
-            + "\nLocal IP: " + network.local_ip
-            + "\nMAC Address: " + network.mac_address
-            + "\nSubnet Mask: " + network.subnet_mask
-        );
+            if (response.equals("y")) {
+                System.out.println(colors.get("yellow") + "\n> " + colors.get("reset") + "Enter the file path:");
+                String filePath = scannerObj.nextLine();
 
-        System.out.println("\n>> " + colors.get("orange") + "Storage Information" + colors.get("reset") + "\n");
+                new FileMetadata(filePath);
+            } 
+            else if (response.equals("n")){
+                run = false;
+            }
+            else {
+                System.out.println(colors.get("red") + "[ERROR]: " + colors.get("reset") + "Invalid input. Please try again.");
+            }
+        } while (run);
 
-        System.out.println(colors.get("purple") + "RAM: " + colors.get("reset") + Storage.RAM_capacity + " GB " + "(Available: " + Storage.RAM_available + " GB | " + "Used: " + Storage.RAM_used + " GB)" +  "\n");
+        System.out.println("\n" + colors.get("green") + "[EOF] " + colors.get("reset") + "Thank you for using the system information tool!" + colors.get("reset"));
 
-        int hardDiskCount = 1;
-
-        for (File disk : Storage.hardDrives) {
-            System.out.println(colors.get("grey") + "--[ Disk #" + hardDiskCount + " ]--" + colors.get("reset"));
-            Storage.getHardDriveInfo(disk);
-            hardDiskCount++;
-        }
+        scannerObj.close();
     }
 }
