@@ -5,17 +5,14 @@ public class OS extends Info {
 
     private String manufacturer = "Unknown";
 
-    // Contstructor
     public OS() {
         manufacturer = this.getManufacturerName();
     }
 
-    // Getters
     public static String getManufacturer() {
         return new OS().manufacturer;
     }
 
-    // Private Methods
     private String getManufacturerName() {
         String os_name = OS.name.toLowerCase();
 
