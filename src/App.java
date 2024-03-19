@@ -44,8 +44,8 @@ public class App {
             }
         } while (run);
 
-        System.out.println("\n" + colors.get("green") + "[EOF] " + colors.get("reset") + "Thank you for using the system information tool!" + colors.get("reset"));
-
         scannerObj.close();
+
+        System.out.println("\nThank you for using the system information tool!");
     }
 }
