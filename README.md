@@ -2,7 +2,7 @@
 
 ---
 
-![presentation-image](https://github.com/PetrisGR/Java-SysInfoApp/assets/121623120/08fcb5a3-954a-41ed-bdd0-701364602420)
+![presentation-image](https://github.com/PetrisGR/Java-SysInfoApp/assets/121623120/16beff0a-6f37-4838-bb8b-369859262fec)
 
 ---
 
